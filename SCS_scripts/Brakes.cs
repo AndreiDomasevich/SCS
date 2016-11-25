@@ -9,8 +9,8 @@ public class Brakes : MonoBehaviour
 	public WheelCollider rearRight;
 	//
 	public float brakeForce = -1000.0f;
-	// IMPORTANT : only use a value between 0.0~1.0 on brakeBalance : IMPORTANT //
-	public float brakeBalance = 0.5f; // Percentage : a Value of 0.75 = front(0.75) rear(0.25) ; a Value of 0.25 = front(0.25) rear (0.75)
+	// 
+	public float brakeBalance = 0.5f; 
 	//
 	public float noInputMultiplier = -0.35f;
 	//
