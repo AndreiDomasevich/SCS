@@ -5,23 +5,21 @@ public class Steering : MonoBehaviour
 {
 	public WheelCollider frontLeftWheel;
 	public WheelCollider frontRightWheel;
-	//
+
 	public Transform steeringWheel;
-	//
+
 	public float steeringSensitivity = 15.0f;
-	//
+
 	private float inputValue = 0.0f;
-	//
+
 	private float steeringValue = 0.0f;
-	//
+
 	public float maxRelativeVelocity = 50.0f;
 	public float relativeVelocity = 0.0f;
 	public float velocityPercentage = 0.0f;
-	//
-	
-	//
 
-	void FixedUpdate (){
+
+	private void FixedUpdate (){
 		
 		relativeVelocity = transform.InverseTransformDirection (GetComponent<Rigidbody>().velocity).z;
 		if (relativeVelocity < 0.0f) {

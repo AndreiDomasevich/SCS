@@ -7,33 +7,31 @@ public class Brakes : MonoBehaviour
 	public WheelCollider frontRight;
 	public WheelCollider rearLeft;
 	public WheelCollider rearRight;
-	//
+
 	public float brakeForce = -1000.0f;
-	// 
+	//  only use a value between 0.0~1.0 on brakeBalance //
 	public float brakeBalance = 0.5f; 
-	//
+	// Percentage : a Value of 0.75 = front(0.75) rear(0.25) ; 
+	// a Value of 0.25 = front(0.25) rear (0.75)
 	public float noInputMultiplier = -0.35f;
-	//
+
 	private float frontBrakeBalance = 0.0f;
 	private float rearBrakeBalance = 0.0f;
-	//
+
 	public float applyBrakeForceFront = 0.0f;
 	public float applyBrakeForceRear = 0.0f;
-	//
-	public float inputValue = 0.0f;
-	//
-	private float relativeVelocity = 0.0f;
-	//
 
-	//
-	void Start ()
+	public float inputValue = 0.0f;
+
+	private float relativeVelocity = 0.0f;
+
+	private void Start ()
 	{
 		frontBrakeBalance = brakeBalance;
 		rearBrakeBalance = 1.0f - brakeBalance;
 	}
-	
-	//
-	void FixedUpdate ()
+
+	private void FixedUpdate ()
 	{
 		relativeVelocity = transform.InverseTransformDirection (GetComponent<Rigidbody>().velocity).z;
 		

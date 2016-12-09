@@ -5,28 +5,26 @@ public class Engine : MonoBehaviour
 {
 	public WheelCollider rearLeftWheelCollider;
 	public WheelCollider rearRightWheelCollider;
-	//
+
 	public bool automatic = true;
 	public float[] gearbox;
 	private int currentGear;
 	private int appropriateGear;
-	//
+
 	public float engineTorque = 180.0f;
 	public float minEngineRPM = 1100.0f;
 	public float maxEngineRPM = 2500.0f;
-	//
+
 	private float engineRPM = 0.0f;
 	private float applyTorque = 0.0f;
-	//
+
 	private float inputValue = 0.0f;
-	//
+
 	private float wheelRPM = 0.0f;
-	//
+
 	public float relativeVelocity = 0.0f;
-	//
-	
-	//
-	void FixedUpdate ()
+
+    private void FixedUpdate ()
 	{
 		relativeVelocity = transform.InverseTransformDirection (GetComponent<Rigidbody>().velocity).z;
 		
@@ -41,8 +39,8 @@ public class Engine : MonoBehaviour
 		rearRightWheelCollider.motorTorque = applyTorque;
 
 	}	
-	//
-	void Gearbox ()
+
+	private void Gearbox ()
 	{
 		wheelRPM = (rearLeftWheelCollider.rpm + rearRightWheelCollider.rpm) / 2;
 		

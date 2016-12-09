@@ -5,25 +5,22 @@ public class ChangeCamera : MonoBehaviour
 {
 	public GameObject[] camera_;
 	public GameObject[] helpText;
-	//
+
 	private bool help = true;
 	private int currentCamera = 0;
-	//
-	
-	//
-	void Start ()
+
+	private void Start ()
 	{
-		for (int a = 0; a < camera_.Length; a++) {
-			if (a == 0) {
-				camera_ [a].SetActive (true);
+		for (int num_camera = 0; num_camera < camera_.Length; num_camera++) {
+			if (num_camera == 0) {
+				camera_[num_camera].SetActive (true);
 			} else {
-				camera_ [a].SetActive (false);
+				camera_[num_camera].SetActive (false);
 			}
 		}
 	}
-	
-	//
-	void Update ()
+
+	private void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.C)) {
 			camera_ [currentCamera].SetActive (false);

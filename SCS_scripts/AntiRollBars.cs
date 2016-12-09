@@ -5,41 +5,49 @@ public class AntiRollBars : MonoBehaviour
 {
 	public WheelCollider leftWheelCollider;
 	public WheelCollider rightWheelCollider;
-	//
+
 	public float antiRollPressure = 5000.0f;
-	//
+
 	private WheelHit hit;
-	//
+
 	private float leftSideTravel = 1.0f;
 	private float rightSideTravel = 1.0f;
-	//
-	private float antiRollForce = 0.0f;
-	//
-	
-	//
-	void FixedUpdate ()
-	{
 
-		bool leftWheelGrounded = leftWheelCollider.GetGroundHit (out hit);
+	private float antiRollForce = 0.0f;
+
+	
+
+	private void FixedUpdate ()
+	{
+		bool leftWheelGrounded = GroundHit (this.leftWheelCollider);
 		
 		if (leftWheelGrounded == true) {
-			leftSideTravel = (-leftWheelCollider.transform.InverseTransformPoint (hit.point).y - leftWheelCollider.radius) / leftWheelCollider.suspensionDistance;
+			leftSideTravel = 
+				(-leftWheelCollider.transform.InverseTransformPoint (hit.point).y - 
+					leftWheelCollider.radius) / leftWheelCollider.suspensionDistance;
 		}
 		
-		bool rightWheelGrounded = rightWheelCollider.GetGroundHit (out hit);
+		bool rightWheelGrounded = GroundHit (this.rightWheelCollider);
 		
 		if (rightWheelGrounded == true) {
-			rightSideTravel = (-rightWheelCollider.transform.InverseTransformPoint (hit.point).y - rightWheelCollider.radius) / rightWheelCollider.suspensionDistance;
+			rightSideTravel = (-rightWheelCollider.transform.InverseTransformPoint (hit.point).y - 
+				rightWheelCollider.radius) / rightWheelCollider.suspensionDistance;
 		}
 		
 		antiRollForce = (leftSideTravel - rightSideTravel) * antiRollPressure;
 		
 		if (leftWheelGrounded == true) {
-			GetComponent<Rigidbody>().AddForceAtPosition (leftWheelCollider.transform.up * -antiRollForce, leftWheelCollider.transform.position);
+			GetComponent<Rigidbody>().AddForceAtPosition 
+			(leftWheelCollider.transform.up * -antiRollForce, leftWheelCollider.transform.position);
 		}
 		
 		if (rightWheelGrounded == true) {
-			GetComponent<Rigidbody>().AddForceAtPosition (rightWheelCollider.transform.up * antiRollForce, rightWheelCollider.transform.position);
+			GetComponent<Rigidbody>().AddForceAtPosition 
+			(rightWheelCollider.transform.up * antiRollForce, rightWheelCollider.transform.position);
 		}
+	}
+
+	private bool GroundHit(WheelCollider wheelCollider){
+		return wheelCollider.GetGroundHit (out hit);
 	}
 }
